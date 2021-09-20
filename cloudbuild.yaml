@@ -1,0 +1,39 @@
+steps:
+  # move .env.test to.env
+  - name: "bash"
+    args: ["mv", ".env.test", ".env"]
+    # install yarn
+  - name: "gcr.io/cloud-builders/yarn"
+    args: ["install"]
+    # run test
+  - name: "gcr.io/cloud-builders/yarn"
+    args: ["run", "test"]
+    # build project
+  - name: "gcr.io/cloud-builders/yarn"
+    args: ["run", "build"]
+  # Build the container image
+  - name: gcr.io/cloud-builders/docker
+    args: [
+    'build', 
+    '-t', 
+    'gcr.io/$PROJECT_ID/member-management:$SHORT_SHA',
+    '-t', 
+    'gcr.io/$PROJECT_ID/member-management:latest',
+    '.'
+    ]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/member-management:$SHORT_SHA"]
+  # Update container image to GKE
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      [
+        "set",
+        "image",
+        "deployment/web2",
+        "web2=gcr.io/$PROJECT_ID/member-management:$SHORT_SHA",
+      ]
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=us-west1-a"
+      - "CLOUDSDK_CONTAINER_CLUSTER=loadbalance"
+# Push the container image to Container Registry
+images: ["gcr.io/$PROJECT_ID/member-management:latest"]
