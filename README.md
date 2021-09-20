@@ -9,10 +9,39 @@ Member Management is a NodeJS backend service which manage all members for the o
 - yarn (recommended and it is assume as the default package management tool in this documentation)
 - Google Cloud SDK
 
-## install gcloud
+# Swagger api document
+### For member management
+
+```sh
+git clone git@github.com:wgod58/member-management.git
+
+cd member-management
+
+yarn install
+
+yarn run start
+
+```
+
+Open browser and check this endpoint
+
+- http://localhost:5020/member-management/api-docs/
+
+# Install gcloud
 
 https://cloud.google.com/sdk/docs/install#mac
 gcloud command not found - while installing Google Cloud SDK
+
+## Setup gcloud
+
+```sh
+# select project id xend-326306
+# default zone us-west1-a
+$ gcloud init
+
+# If already have a account. Please logout first
+$ gcloud auth revoke
+```
 
 ### Setup
 
@@ -33,18 +62,9 @@ $ yarn husky install
 
 ```
 
-## The DB connection with localhost develop
+# The DB connection with localhost develop
 
 The Cloud SQL Auth proxy provides secure access to your instances without the need for Authorized networks or for configuring SSL.
-
-```sh
-# select project id xend-326306
-# default zone us-west1-a
-$ gcloud init
-
-# If already have a account. Please logout first
-$ gcloud auth revoke
-```
 
 ```sh
 curl -o cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.386
@@ -70,7 +90,7 @@ DB_ACCOUNT=
 DB_PASSWORD=
 ```
 
-### Development
+# Development
 
 To run the backend server while reload upon files change
 
@@ -91,13 +111,15 @@ $ yarn run:watch
 
 - End point:
 
-  1. RESTful http://localhost:5020/member-management/
+  1.Swagger doc http://localhost:5020/member-management/api-docs/
 
-  2. Swagger doc http://localhost:5020/member-management/api-docs/
+  2.GET http://localhost:5020/member-management/orgs/{org-name}/members
 
-  3. Version http://localhost:5020/member-management/version
+  3.POST http://localhost:5020/member-management/orgs/{org-name}/members
 
-### Unit test coverage report
+  4.GET http://localhost:5020/member-management/version -> get server version
+
+# Unit test coverage report
 
 ```sh
 $ yarn coverage
