@@ -3,6 +3,15 @@ import logger from 'utils/logger';
 
 const nameSpace = 'service/member';
 
+/**
+ * Add member
+ * @param {Object} data
+ * @param {string} data.orgName
+ * @param {string} data.userName
+ * @param {string} data.avatarUrl
+ * @param {number} data.followers
+ * @param {number} data.following
+ */
 async function addMember({
   orgName,
   userName,
@@ -25,6 +34,11 @@ async function addMember({
   );
 }
 
+/**
+ * Get member by org name
+ * @param {Object} data
+ * @param {string} data.orgName
+ */
 async function getMemberByOrganization({ orgName }) {
   const org = await organizationModel.findOne({
     where: { orgName },

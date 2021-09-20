@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Member management API",
+    "version": "0.1.4"
+  },
+  "servers": [
+    {
+      "url": "http://34.149.193.224/member-management/",
+      "description": "Member management API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Member",
+      "description": "Member api"
+    }
+  ],
+  "paths": {
+    "/orgs/{orgName}/members": {
+      "post": {
+        "tags": [
+          "Member"
+        ],
+        "summary": "add member",
+        "parameters": [
+          {
+            "name": "orgName",
+            "in": "path",
+            "description": "Organization name",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "xendit"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "member"
+                ],
+                "properties": {
+                  "orgName": {
+                    "type": "string",
+                    "example": "xendit"
+                  },
+                  "avatarUrl": {
+                    "type": "string",
+                    "example": "avatarUrl"
+                  },
+                  "followers": {
+                    "type": "integer",
+                    "example": 11111
+                  },
+                  "following": {
+                    "type": "integer",
+                    "example": 22222
+                  },
+                  "userName": {
+                    "type": "string",
+                    "example": "zedd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Create success"
+          },
+          "400": {
+            "description": "Response error request",
+            "content": {
+              "applocation/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response error",
+            "content": {
+              "applocation/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Member"
+        ],
+        "summary": "get staffs information",
+        "parameters": [
+          {
+            "name": "orgName",
+            "in": "path",
+            "description": "Organization name",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "xendit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response status on delete success",
+            "content": {
+              "applocation/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/member"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response error request",
+            "content": {
+              "applocation/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response error",
+            "content": {
+              "applocation/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "member": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "userName": {
+            "type": "string",
+            "example": "zedd"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "example": "avatarUrl"
+          },
+          "followers": {
+            "type": "integer",
+            "example": 1222
+          },
+          "following": {
+            "type": "integer",
+            "example": 999
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2021-09-20T08:35:29.753Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2021-09-20T08:35:29.753Z"
+          },
+          "organizationId": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "inline_response_400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Miss parameters"
+          }
+        }
+      },
+      "inline_response_500": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Server Error"
+          }
+        }
+      }
+    }
+  }
+}

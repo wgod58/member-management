@@ -4,6 +4,11 @@ import logger from 'utils/logger';
 
 const nameSpace = 'controller/member';
 
+/**
+ * Handle express req and res to get members by org name
+ * @param {Object} req
+ * @param {Object} res
+ */
 async function getMemberByOrganization(req, res) {
   try {
     const data = { ...req.query, ...req.body, ...req.params };
@@ -28,6 +33,11 @@ async function getMemberByOrganization(req, res) {
   }
 }
 
+/**
+ * Handle express req and res to add member
+ * @param {Object} req
+ * @param {Object} res
+ */
 async function addMember(req, res) {
   try {
     const data = { ...req.query, ...req.body, ...req.params };
