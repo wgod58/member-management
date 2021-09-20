@@ -10,6 +10,7 @@ Member Management is a NodeJS backend service which manage all members for the o
 - Google Cloud SDK
 
 # Swagger api document
+
 ### For member management
 
 ```sh
@@ -146,6 +147,6 @@ And it deploy to Google Kubernetes Engine automatically.
 
       - For more information about Cloud Build please view the Google GCloud Platform Documentation
 
-### Troubleshooting
+# Troubleshooting
 
 - Please update any issue here
